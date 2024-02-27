@@ -1,0 +1,90 @@
+#
+# developer convenience.
+# Copy this file to Makefile and then you can (e.g.):
+#
+#  % make install
+#  % make run
+#
+#
+
+up:	## Start Docker
+	docker-compose up -d
+
+up-m1:  ## Start the docker containers on a M1 Mac
+	docker-compose -f docker-compose-m1.yml up -d
+
+down:	## Stop Docker
+	docker-compose down
+
+down-m1:  ## Stop the docker containers on a M1 Mac
+	docker-compose -f docker-compose-m1.yml down
+
+run: up	## Start Rails
+	foreman start
+
+## Start Rails on a M1 Mac
+run-m1: up-m1	
+	foreman start
+
+test: clean	## Run the rspec suite
+	TEST_DOWNLOADS=true CI=true bundle exec rspec --format documentation --format RSpec::Github::Formatter --tty
+
+clean:	## Remove old files
+	rm -f log/test.log
+	rm -f app/assets/javascripts/*webpack*
+	rm -rf tmp/capybara
+	rm -rf coverage
+
+lint:	## Run the linter
+	CI=true bundle exec rake efolder:lint
+
+rubocop:	## Run rubocop
+	bundle exec rake lint
+
+jslint:	## Run the js linter
+	cd client && yarn run lint
+
+csslint: ## Run the scss linter
+	scss-lint --color
+
+security:	## Run security task
+	bundle exec rake security
+
+check: test lint jslint
+
+logs:	## Follow the Docker logs
+	docker-compose logs -f
+
+db:	## Connect with psql
+	bundle exec rails dbconsole
+
+c:	## Start Rails console
+	bundle exec rails console
+
+db-migrate: migrate
+
+etl-migrate: migrate
+
+migrate:	## Run pending migrations
+	bundle exec rake db:migrate
+
+rollback:	## Rollback last migration
+	bundle exec rake db:rollback
+
+fresh:  ## https://github.com/imsky/git-fresh - updates local master to match origin, stashes changes, prunes remote branches
+	git fresh
+
+reset:	## Reset the db
+	bundle exec rake db:reset
+
+install:	## bundle/yarn install dependencies
+	bundle check || bundle install
+	cd client && yarn
+
+update: fresh install migrate
+
+# Self-documented makefile from https://marmelab.com/blog/2016/02/29/auto-documented-makefile.html
+help:  ## Shows help
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: test run clean lint jslint check logs db update security install reset migrate rollback c

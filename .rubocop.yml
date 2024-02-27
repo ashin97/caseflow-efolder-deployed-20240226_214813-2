@@ -1,0 +1,92 @@
+AllCops:
+  TargetRubyVersion: 2.3
+  TargetRailsVersion: 4.2
+  Include:
+    - '**/config.ru'
+    - '**/Rakefile'
+    - '**/*.rake'
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'vendor/**/*'
+
+Rails/Output:
+  Exclude:
+    - 'lib/**/*.rb'
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Enabled: false
+
+Rails/OutputSafety:
+  Enabled: false
+
+Rails/InverseOf:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 200
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/ClassLength:
+  Max: 200
+
+Metrics/AbcSize:
+  Max: 30
+
+Style/DoubleNegation:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Style/NegatedIf:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Rails/DynamicFindBy:
+  Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false

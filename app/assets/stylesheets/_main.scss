@@ -1,0 +1,282 @@
+@import 'commons';
+@import 'progress-bar';
+@import 'download';
+@import 'coachmarks';
+
+.cf-logo-image {
+  @include retina-image("efolder-express-logo", 32px 32px, $asset-pipeline: true);
+}
+
+// Candidate for USWDS
+.usa-table-no-header {
+  @extend .usa-table-borderless;
+
+  thead {
+    th {
+      background-color: $color-white;
+    }
+  }
+
+  th:first-child,
+  td:first-child {
+    padding-left: 0;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 0;
+  }
+}
+
+// Candidate for Caseflow Commons
+a {
+  text-decoration: none !important;
+}
+
+.cf-loading-indicator {
+  display: none !important;
+  position: relative;
+}
+
+.cf-is-loading {
+  .cf-submit {
+    display: none;
+  }
+
+  .cf-loading-indicator {
+    display: block !important;
+
+    .usa-search-submit-text {
+      &.with-icon {
+        font-size: 75%;
+        position: absolute;
+        top: 35%;
+        left: 1.25rem;
+      }
+    }
+  }
+}
+
+// USWDS override
+table th,
+table td {
+  border-color: $color-gray-lighter;
+}
+
+.cf-stats-section {
+  &.-activity,
+  &.-searches {
+    svg .bar { fill: $color-primary-alt; }
+  }
+
+  &.-timing {
+    svg .bar { fill: $color-green-light; }
+  }
+
+  &.-errors {
+    svg .bar { fill: $color-secondary; }
+  }
+}
+
+.cf-spacer-icon {
+  height: 1em;
+  width: 1em;
+}
+
+.ee-fetching-files {
+  text-align: center;
+  color: $color-gray;
+  font-size: 1.1em;
+}
+
+.ee-page-loading {
+  width: 100%;
+  text-align: center;
+  color: $color-gray;
+}
+
+.ee-page-loading-icon {
+  padding-top: 220px;
+  position: relative;
+  height: 200px;
+  width: 200px;
+  margin: auto;
+}
+
+.ee-icon-progress {
+  vertical-align: -.45ex;
+  width: 1em;
+  height: 1em;
+
+  path {
+    fill: $color-secondary-dark;
+  }
+}
+
+.ee-icon-loading-front {
+  @include animation(backwardspin 9s linear infinite);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ee-icon-loading-back {
+  @include animation(spin 9s linear infinite);
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.ee-pill-icon-loading-front {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+
+  svg {
+    @include animation(backwardspin 5s linear infinite);
+  }
+}
+
+.ee-pill-icon-loading-back {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+
+  svg {
+    @include animation(spin 5s linear infinite);
+  }
+}
+
+.ee-document-list {
+  border: 1px solid $color-gray-lighter;
+  padding-top: 1px;
+  border-bottom: 0;
+}
+
+.ee-subheading {
+  font-weight: normal !important;
+  color: $color-gray;
+}
+
+.ee-button-list {
+  @include unstyled-list;
+
+  li { display: inline-block; }
+}
+
+.documents {
+  @include unstyled-list;
+}
+
+.ee-documents-table {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: block;
+}
+
+
+.cf-help-divider {
+  margin: 5px 25px 30px auto;
+}
+
+// candidate for commons
+.usa-search [type="submit"] {
+  background-image: none;
+}
+
+
+.cf-efolder-header.cf-app-segment {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.cf-user-name,
+.cf-dropdown-trigger {
+  font-size: 17px;
+}
+
+.cf-efolder-name {
+  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 400;
+  color: $color-gray-dark;
+  line-height: 2.2;
+}
+
+.cf-txt-uc,
+.cf-efolder-id-control {
+  text-transform: uppercase;
+  font-size: 17px;
+  color: $color-gray;
+}
+
+.cf-retrieve-button.cf-submit {
+  padding: 1rem 2rem;
+  margin: 0;
+}
+
+.ee-copy-button {
+  padding: 1rem 2rem;
+
+}
+
+.not-react {
+  .cf-app-footer {
+    margin-top: 150px;
+  }
+}
+
+
+.ee-button-align {
+  line-height: 3;
+}
+
+.ee-download-button.ee-right-button {
+  margin: 0;
+}
+
+.cf-tab-content {
+  border-bottom: 0;
+}
+
+.ee-document-scroll {
+  display: block;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+
+.usa-sr-only {
+  min-width: 19px;
+}
+
+.document-col {
+  min-width: 627px;
+}
+
+.source-col {
+  min-width: 93px;
+}
+
+.receipt-col {
+  min-width: 128px;
+}
+
+.ee-status {
+  min-width: 49px;
+}
+
+.ee-document-id {
+  min-width: 340px;
+}
+
+.sources-col {
+  min-width: 116px;
+}
+
+.upload-col {
+  min-width: 152px;
+}
+
+.ee-msg-status.cf-msg-screen-deck {
+  margin-bottom: 30px;
+}

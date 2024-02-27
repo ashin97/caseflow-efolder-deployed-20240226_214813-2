@@ -1,0 +1,41 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV["DB_CONN_POOL_MAX_SIZE"] || 5 %>
+  timeout: 5000
+
+default: &default_local
+  host: <%= ENV['POSTGRES_HOST'] %>
+  username: <%= ENV['POSTGRES_USER'] || `whoami` %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+
+development:
+  <<: *default
+  <<: *default_local
+  database: caseflow_efolder_development
+  port: 15432
+
+staging:
+  <<: *default
+  <<: *default_local
+  database: caseflow_efolder_staging
+
+test:
+  <<: *default
+  <<: *default_local
+  database: caseflow_efolder_test
+  port: <%= ENV['POSTGRES_PORT'] || 5432 %>
+
+production:
+  <<: *default
+  url: postgresql-makara:///
+  makara:
+    sticky: true
+    connections:
+      - role: master
+        name: primary
+        url: <%= ENV["POSTGRES_URL"] %>
+      - name: replica
+        url: <%= ENV["POSTGRES_URL"] %>
+# use different env var once replica db is ready
+#        url: <%= ENV["POSTGRES_REPLICA_URL"] %>
